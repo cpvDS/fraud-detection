@@ -2,6 +2,13 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
+import streamlit as st
+
+from auth import login_required
+login_required()
+
+
+
 st.set_page_config(layout="wide")
 @st.cache_data
 def load_data():
@@ -53,7 +60,7 @@ df["flagged_by_rules"] = df.apply(apply_rules, axis=1)
 
 flagged = df[df["flagged_by_rules"] == True]
 frauds_only = flagged[flagged["is_fraud"] == 1]
-st.subheader("🛑 Actual Frauds Flagged by Rules")
+st.subheader("Actual Frauds Flagged by Rules")
 st.write(frauds_only[["transaction_id", "user_id", "amount", "country", "login_time", "device_type", "ip_address","txn_velocity_last_hour","transaction_type","num_failed_logins","risk_score","is_high_risk_merchant"]])
 
 st.metric("Total Transactions", len(df))
