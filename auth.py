@@ -12,7 +12,7 @@ def login_required():
             </style>
         """, unsafe_allow_html=True)
 
-        st.title("🔐 Login Required")
+        st.title("Login Required")
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
 
